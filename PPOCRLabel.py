@@ -2297,10 +2297,10 @@ class MainWindow(QMainWindow):
             settings[SETTING_PAINT_INDEX] = self.displayIndexOption.isChecked()
             settings[SETTING_DRAW_SQUARE] = self.drawSquaresOption.isChecked()
             settings.save()
-            try:
-                self.saveLabelFile()
-            except Exception:
-                pass
+            # try:
+            #     self.saveLabelFile()
+            # except Exception:
+            #     pass
 
     def loadRecent(self, filename):
         if self.mayContinue():
@@ -3395,8 +3395,8 @@ class MainWindow(QMainWindow):
                     img_path = os.path.dirname(base_dir) + "/" + key
                     img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), -1)
                     for i, label in enumerate(self.PPlabel[idx]):
-                        if label["difficult"]:
-                            continue
+                        # if label["difficult"]:
+                        #     continue
                         img_crop = get_rotate_crop_image(
                             img, np.array(label["points"], np.float32)
                         )
@@ -3598,7 +3598,7 @@ def get_main_app(argv=[]):
     arg_parser.add_argument(
         "--img_list_natural_sort", type=str2bool, default=True, nargs="?"
     )
-    arg_parser.add_argument("--kie", type=str2bool, default=False, nargs="?")
+    arg_parser.add_argument("--kie", type=str2bool, default=True, nargs="?")
     arg_parser.add_argument(
         "--predefined_classes_file",
         default=os.path.join(
